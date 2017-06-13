@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:text="Dato"
+        android:textSize="25sp"
+        android:gravity="bottom"
+        android:textColor="@color/colorBlack"/>
+
+    <Button
+        android:id="@+id/date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edges_textbox"
+        android:layout_weight="0.50"
+        />
+
+    <TextView
+        android:id="@+id/txt_endDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:text="Udløbsdato"
+        android:textSize="25sp"
+        android:gravity="bottom"
+        android:textColor="@color/colorBlack"/>
+
+    <Button
+        android:id="@+id/endDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edges_textbox"
+        android:layout_weight="0.50"
+        />
+
+    <TextView
+        android:id="@+id/txt_tags"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.50"
+        android:text="Tags"
+        android:textSize="25sp"
+        android:gravity="bottom"
+        android:textColor="@color/colorBlack" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edges_textbox"
+        android:layout_weight="1"
+        android:text="Please put in tags"
+        />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/tilføj_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tilføj"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="90dp"/>
+
+        <Button
+            android:id="@+id/fortryd_button"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Fortryd"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="90dp"/>
+    </LinearLayout>
+
+</LinearLayout>
