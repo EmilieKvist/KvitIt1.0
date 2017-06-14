@@ -1,17 +1,20 @@
 package com.example.emiliekvist.kvitit;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 
+
 public class HomeActivity extends AppCompatActivity {
+
     FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
 
@@ -47,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 // perform setOnTabSelectedListener event on TabLayout
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 // get the current selected tab's position and replace the fragment accordingly
@@ -60,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new KategoriTab();
                         break;
                 }
-                FragmentManager fm = getSupportFragmentManager();
+                FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.simpleFrameLayout, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
