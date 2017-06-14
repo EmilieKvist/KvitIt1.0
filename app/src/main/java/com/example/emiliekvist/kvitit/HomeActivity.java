@@ -1,15 +1,24 @@
 package com.example.emiliekvist.kvitit;
 
 
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+
 import android.app.Activity;
+
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 
 
@@ -17,6 +26,9 @@ public class HomeActivity extends AppCompatActivity {
 
     FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +39,20 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Adding onClickListener for add receipt button
+        FloatingActionButton addReceipt = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        addReceipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+
 
 
         // get the reference of FrameLayout and TabLayout
@@ -63,7 +89,12 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new KategoriTab();
                         break;
                 }
-                FragmentManager fm = getFragmentManager();
+
+
+                FragmentManager fm = getSupportFragmentManager();
+
+          
+
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.simpleFrameLayout, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -83,8 +114,14 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //imageView.setImageBitmap(imageBitmap);
+        }
+    }
 
 
 }
