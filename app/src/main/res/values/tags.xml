@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tags_array">
+        <item>Vælg tags</item>
+        <item>Tøj</item>
+        <item>Sko</item>
+        <item>Tasker</item>
+    </string-array>
+</resources>
