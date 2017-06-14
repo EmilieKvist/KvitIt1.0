@@ -1,15 +1,19 @@
 package com.example.emiliekvist.kvitit;
 
 
+
 import android.content.Intent;
 import android.graphics.Bitmap;
+
+import android.app.Activity;
+
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,7 +21,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 
+
 public class HomeActivity extends AppCompatActivity {
+
     FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -70,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 // perform setOnTabSelectedListener event on TabLayout
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 // get the current selected tab's position and replace the fragment accordingly
@@ -84,7 +90,11 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                 }
 
+
                 FragmentManager fm = getSupportFragmentManager();
+
+          
+
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.simpleFrameLayout, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

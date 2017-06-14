@@ -10,6 +10,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
 
+
     </style>
         <string name="mine_kvitteringer">Mine Kvitteringer </string>
         <string name="kategorier">Kategorier</string>
