@@ -6,6 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+
     </style>
+        <string name="mine_kvitteringer">Mine Kvitteringer </string>
+        <string name="kategorier">Kategorier</string>
+
+
+
 
 </resources>
