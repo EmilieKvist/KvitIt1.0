@@ -29,6 +29,12 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmList;
+import io.realm.RealmModel;
 
 /**
  * Created by EmilieKvist on 13-06-2017.
@@ -53,6 +59,9 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_receipt);
+
+        // lav en Realm
+        final Realm realm = Realm.getDefaultInstance();
 
         // få fat i billede
         Bundle extras = getIntent().getExtras();
@@ -202,13 +211,15 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
                 Date theEndDate = new Date(ourEndYear, ourEndMonth, ourEndDay);
                 // get tags
-                String tagStr = tagsView.getText().toString();
-                String[] theTags = tagStr.split(" ");
+                String theTags = tagsView.getText().toString();
                 // Making a receipt
                 Kvittering newRec = new Kvittering(theDate, theEndDate, theTags, currentPath);
-
-                // GEM KVITTERING I REALM
-
+                // add to Realm
+                realm.beginTransaction();
+                //realm.createObject(Kvittering.class);
+                realm.copyToRealm(newRec);
+                realm.commitTransaction();
+                Toast.makeText(AddReceiptActivity.this, "Kvitteringen er tilføjet", Toast.LENGTH_LONG).show();
                 // Start homeActivity
                 Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
                 startActivity(homeIntent);

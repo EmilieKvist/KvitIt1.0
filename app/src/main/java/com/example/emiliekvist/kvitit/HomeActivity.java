@@ -1,14 +1,7 @@
 package com.example.emiliekvist.kvitit;
 
 
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-
-import android.app.Activity;
-
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,13 +17,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -46,6 +40,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
+
+        for (Kvittering k : kvitteringer) {
+            Log.i("HomeAct", "der er gemt et billede");
+        }
 
         //getActionBar().setHomeButtonEnabled(true);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
