@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.DatePickerDialog;
@@ -35,6 +36,8 @@ import android.widget.TextView;
 
 public class AddReceiptActivity extends Activity implements OnDateSetListener {
 
+    private String currentPath;
+
     private Button date;
     private Button endDate;
 
@@ -50,6 +53,12 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_receipt);
+
+        // få fat i billede
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            currentPath = extras.getString("current_path");
+        }
 
         // dato og udløbsdato datepickers
         Calendar calendar = Calendar.getInstance();
@@ -184,17 +193,25 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 int ourDay = Integer.parseInt(ourDateSp[0]);
                 int ourMonth = Integer.parseInt(ourDateSp[1]);
                 int ourYear = Integer.parseInt(ourDateSp[2]);
+                Date theDate = new Date(ourYear, ourMonth, ourDay);
                 // get endDate
                 String ourEndDate = endDate.getText().toString();
-                String[] ourEndDateSp = ourDate.split("-");
+                String[] ourEndDateSp = ourEndDate.split("-");
                 int ourEndDay = Integer.parseInt(ourEndDateSp[0]);
                 int ourEndMonth = Integer.parseInt(ourEndDateSp[1]);
                 int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
+                Date theEndDate = new Date(ourEndYear, ourEndMonth, ourEndDay);
                 // get tags
                 String tagStr = tagsView.getText().toString();
-                String[] tagStrSp = tagStr.split(" ");
-                // get current photo
+                String[] theTags = tagStr.split(" ");
+                // Making a receipt
+                Kvittering newRec = new Kvittering(theDate, theEndDate, theTags, currentPath);
 
+                // GEM KVITTERING I REALM
+
+                // Start homeActivity
+                Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
             }
         });
     }

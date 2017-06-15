@@ -127,7 +127,6 @@ public class HomeActivity extends AppCompatActivity {
                     camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     Log.i("HomeAct", "starting camera");
                     startActivityForResult(camera_intent, CAM_REQUEST);
-                    // startActivityForResult(camera_intent, REQUEST_TAKE_PHOTO);
                 }
 
             }
@@ -152,19 +151,6 @@ public class HomeActivity extends AppCompatActivity {
         return image;
     }
 
-    /*private File getFile() {
-        File folder = new File("sdcard/camera_app");
-
-        if(!folder.exists()){
-            folder.mkdir();
-        }
-
-        File image_file = new File(folder,"cam_image.jpg");
-
-
-        return image_file;
-    }*/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("HomeAct", "current photo path: " + mCurrentPhotoPath);
@@ -173,20 +159,8 @@ public class HomeActivity extends AppCompatActivity {
         Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
         image.setImageBitmap(myBitmap);*/
         Intent addRecIntent = new Intent(HomeActivity.this, AddReceiptActivity.class);
-        //addRecIntent.putExtra(mCurrentPhotoPath, );
+        addRecIntent.putExtra("current_photo", mCurrentPhotoPath);
         startActivity(addRecIntent);
-
-        //String path = "sdcard/camera_app/cam_image.jpg";
-        //imageView.setImageDrawable(Drawable.createFromPath(path));
-/*
- if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            //imageView.setImageBitmap(imageBitmap);
-        }
- */
-
-
     }
 
 
