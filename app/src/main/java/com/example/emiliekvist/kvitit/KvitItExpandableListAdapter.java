@@ -1,15 +1,21 @@
 package com.example.emiliekvist.kvitit;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+
+import io.realm.Realm;
 
 /**
  * Created by Thoke on 2017-06-15.
@@ -18,13 +24,15 @@ import java.util.List;
 public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
+    Realm realm;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
 
     public KvitItExpandableListAdapter(Context context, List<String> listDataHeader,
-                                       HashMap<String, List<String>> listChildData){
+                                       HashMap<String, List<String>> listChildData) {
         this._context = context;
+        realm = Realm.getDefaultInstance();
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
     }
@@ -32,23 +40,22 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return realm.where(Kvittering.class).distinct("dato").sort("dato").size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .size();
+        return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAll().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosition);
+        return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAllSorted("dato").get(childPosition);
     }
 
     @Override
@@ -68,7 +75,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+        String headerTitle = (String) getGroup(groupPosition).toString();
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -85,7 +92,10 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String) getChild(groupPosition, childPosition);
+        final String childText = (String) getChild(groupPosition, childPosition).toString();
+
+//        File myIm = new File(((Kvittering)getChild(groupPosition, childPosition)).photoPath);
+//        Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -95,8 +105,9 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
-
+        //ImageView lblListItem = (ImageView) convertView.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
+        //lblListItem.setImageBitmap(myBitmap);
         return convertView;
     }
 

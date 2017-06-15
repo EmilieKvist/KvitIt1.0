@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         for (Kvittering k : kvitteringer) {
             Log.i("HomeAct", "der er gemt et billede");
         }
+
         /*
         File myIm = new File(kvitteringer.get(0).photoPath);
         ImageView image;
@@ -81,6 +82,12 @@ public class HomeActivity extends AppCompatActivity {
         kategoriTab.setText("Kategorier"); // set the Text for the second Tab
 
         tabLayout.addTab(kategoriTab); // add  the tab  in the TabLayout
+        FragmentManager fm = getFragmentManager();
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.simpleFrameLayout, new MineKvitTab());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
 
         // perform setOnTabSelectedListener event on TabLayout
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
