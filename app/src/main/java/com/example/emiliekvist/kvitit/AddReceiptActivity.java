@@ -171,6 +171,32 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 startActivity(homeIntent);
             }
         });
+
+        // tilføj knap setup
+        add = (Button) findViewById(R.id.tilføj_button);
+
+        add.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get date
+                String ourDate = date.getText().toString();
+                String[] ourDateSp = ourDate.split("-");
+                int ourDay = Integer.parseInt(ourDateSp[0]);
+                int ourMonth = Integer.parseInt(ourDateSp[1]);
+                int ourYear = Integer.parseInt(ourDateSp[2]);
+                // get endDate
+                String ourEndDate = endDate.getText().toString();
+                String[] ourEndDateSp = ourDate.split("-");
+                int ourEndDay = Integer.parseInt(ourEndDateSp[0]);
+                int ourEndMonth = Integer.parseInt(ourEndDateSp[1]);
+                int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
+                // get tags
+                String tagStr = tagsView.getText().toString();
+                String[] tagStrSp = tagStr.split(" ");
+                // get current photo
+
+            }
+        });
     }
 
 

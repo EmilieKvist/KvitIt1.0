@@ -37,8 +37,10 @@ public class HomeActivity extends AppCompatActivity {
 
     FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
-    private ImageView image;
+    //private ImageView image;
     static final int CAM_REQUEST = 1;
+
+    String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,8 +135,6 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    String mCurrentPhotoPath;
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -152,10 +152,6 @@ public class HomeActivity extends AppCompatActivity {
         return image;
     }
 
-
-
-
-
     /*private File getFile() {
         File folder = new File("sdcard/camera_app");
 
@@ -172,11 +168,13 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("HomeAct", "current photo path: " + mCurrentPhotoPath);
-        File myIm = new File(mCurrentPhotoPath);
+        /*File myIm = new File(mCurrentPhotoPath);
         image = (ImageView) findViewById(R.id.image_view);
         Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
-        image.setImageBitmap(myBitmap);
-
+        image.setImageBitmap(myBitmap);*/
+        Intent addRecIntent = new Intent(HomeActivity.this, AddReceiptActivity.class);
+        //addRecIntent.putExtra(mCurrentPhotoPath, );
+        startActivity(addRecIntent);
 
         //String path = "sdcard/camera_app/cam_image.jpg";
         //imageView.setImageDrawable(Drawable.createFromPath(path));
