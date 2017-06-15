@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import android.app.DatePickerDialog;
@@ -28,12 +29,20 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmList;
+import io.realm.RealmModel;
 
 /**
  * Created by EmilieKvist on 13-06-2017.
  */
 
 public class AddReceiptActivity extends Activity implements OnDateSetListener {
+
+    private String currentPath;
 
     private Button date;
     private Button endDate;
@@ -50,6 +59,15 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_receipt);
+
+        // lav en Realm
+        final Realm realm = Realm.getDefaultInstance();
+
+        // få fat i billede
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            currentPath = extras.getString("current_path");
+        }
 
         // dato og udløbsdato datepickers
         Calendar calendar = Calendar.getInstance();
@@ -167,6 +185,42 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
+        // tilføj knap setup
+        add = (Button) findViewById(R.id.tilføj_button);
+
+        add.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get date
+                String ourDate = date.getText().toString();
+                String[] ourDateSp = ourDate.split("-");
+                int ourDay = Integer.parseInt(ourDateSp[0]);
+                int ourMonth = Integer.parseInt(ourDateSp[1]);
+                int ourYear = Integer.parseInt(ourDateSp[2]);
+                Date theDate = new Date(ourYear, ourMonth, ourDay);
+                // get endDate
+                String ourEndDate = endDate.getText().toString();
+                String[] ourEndDateSp = ourEndDate.split("-");
+                int ourEndDay = Integer.parseInt(ourEndDateSp[0]);
+                int ourEndMonth = Integer.parseInt(ourEndDateSp[1]);
+                int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
+                Date theEndDate = new Date(ourEndYear, ourEndMonth, ourEndDay);
+                // get tags
+                String theTags = tagsView.getText().toString();
+                // Making a receipt
+                Kvittering newRec = new Kvittering(theDate, theEndDate, theTags, currentPath);
+                // add to Realm
+                realm.beginTransaction();
+                //realm.createObject(Kvittering.class);
+                realm.copyToRealm(newRec);
+                realm.commitTransaction();
+                Toast.makeText(AddReceiptActivity.this, "Kvitteringen er tilføjet", Toast.LENGTH_LONG).show();
+                // Start homeActivity
                 Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
                 startActivity(homeIntent);
             }
