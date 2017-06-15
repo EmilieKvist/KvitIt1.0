@@ -1,21 +1,16 @@
 package com.example.emiliekvist.kvitit;
 
 
-
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
-
-import android.app.Activity;
-
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -81,8 +76,6 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.addTab(kategoriTab); // add  the tab  in the TabLayout
 
 
-
-
 // perform setOnTabSelectedListener event on TabLayout
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -98,15 +91,11 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                 }
 
-
-               // FragmentManager fm = getSupportFragmentManager();
-
-          
-
-               // FragmentTransaction ft = fm.beginTransaction();
-              //  ft.replace(R.id.simpleFrameLayout, fragment);
-            //    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-              //  ft.commit();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.simpleFrameLayout, fragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.commit();
             }
 
             @Override
@@ -119,7 +108,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private File getFile() {
@@ -131,15 +119,13 @@ public class HomeActivity extends AppCompatActivity {
 
         File image_file = new File(folder,"cam_image.jpg");
 
-
         return image_file;
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String path = "sdcard/camera_app/cam_image.jpg";
         imageView.setImageDrawable(Drawable.createFromPath(path));
-
-
 
     }
 
