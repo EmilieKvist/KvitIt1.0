@@ -5,5 +5,23 @@
         <item>Tøj</item>
         <item>Sko</item>
         <item>Tasker</item>
+        <item>Telefoni</item>
+        <item>Hvidevarer</item>
+        <item>Lyd-Billede</item>
+        <item>Computer</item>
+        <item>Bolig</item>
+        <item>Have</item>
+        <item>Husholdningsapperater</item>
+        <item>Sport-Fritid</item>
+        <item>Spil</item>
+        <item>Foto-Video</item>
+        <item>Børn-Familie</item>
+        <item>Renovering-Byggeri</item>
+        <item>Skønhed-Helse</item>
+        <item>Autoudstyr-Både</item>
+        <item>Kontorartikler</item>
+        <item>Underholdning</item>
+        <item>Diverse</item>
+        <item>Dyr</item>
     </string-array>
 </resources>

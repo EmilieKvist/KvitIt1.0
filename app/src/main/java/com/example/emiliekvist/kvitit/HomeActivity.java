@@ -2,6 +2,8 @@ package com.example.emiliekvist.kvitit;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +50,13 @@ public class HomeActivity extends AppCompatActivity {
         for (Kvittering k : kvitteringer) {
             Log.i("HomeAct", "der er gemt et billede");
         }
+        /*
+        File myIm = new File(kvitteringer.get(0).photoPath);
+        ImageView image;
+        image = (ImageView) findViewById(R.id.image_view);
+        Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
+        image.setImageBitmap(myBitmap);
+        */
 
         //getActionBar().setHomeButtonEnabled(true);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -55,6 +65,8 @@ public class HomeActivity extends AppCompatActivity {
 
         // get the reference of FrameLayout and TabLayout
         simpleFrameLayout = (FrameLayout) findViewById(R.id.simpleFrameLayout);
+
+
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
 
         // Create a new Tab named "Mine Kvitteringer"
@@ -104,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
 
         //Adding onClickListener for add receipt button
         FloatingActionButton addReceipt = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -155,17 +168,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("HomeAct", "current photo path: " + mCurrentPhotoPath);
-        /*File myIm = new File(mCurrentPhotoPath);
-        image = (ImageView) findViewById(R.id.image_view);
-        Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
-        image.setImageBitmap(myBitmap);*/
         Intent addRecIntent = new Intent(HomeActivity.this, AddReceiptActivity.class);
         addRecIntent.putExtra("current_photo", mCurrentPhotoPath);
         startActivity(addRecIntent);
     }
-
-
-
-
 
 }
