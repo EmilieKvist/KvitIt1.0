@@ -65,11 +65,18 @@
             app:backgroundTint="@color/colorPrimaryDark"
             app:fabSize="normal"
             app:srcCompat="@android:drawable/ic_input_add"
+            android:tint="@android:color/white"
             android:layout_gravity="bottom|end"
             android:layout_margin="28dp"
             />
-    </FrameLayout>
 
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp" />
+    </FrameLayout>
 
     <ExpandableListView
         android:layout_width="match_parent"
