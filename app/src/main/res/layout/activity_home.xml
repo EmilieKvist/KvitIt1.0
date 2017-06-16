@@ -49,13 +49,20 @@
         app:tabBackground="@android:color/darker_gray"
         app:tabIndicatorColor="#FF33B5E5"
         app:tabSelectedTextColor="#FF0099CC"
-
         app:tabTextColor="#000" />
 
     <FrameLayout
         android:id="@+id/simpleFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"

@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -80,8 +83,8 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         }
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        dateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year, month, day);
-        endDateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year + 2, month, day);
+        dateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year, month-1, day);
+        endDateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year + 2, month-1, day);
 
         date = (Button) findViewById(R.id.date);
         date.setText(day + "-" + month + "-" + year);
@@ -105,6 +108,11 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                             thisMonth++;
                         } else {
                             thisMonth = 1;
+                        }
+                        if (month < 12) {
+                            month++;
+                        } else {
+                            month = 1;
                         }
                         int thisDay = calendar.get(Calendar.DAY_OF_MONTH);
                         if (year < thisYear ||
@@ -139,6 +147,11 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                         int ourDay = Integer.parseInt(ourDateSp[0]);
                         int ourMonth = Integer.parseInt(ourDateSp[1]);
                         int ourYear = Integer.parseInt(ourDateSp[2]);
+                        if (month < 12) {
+                            month++;
+                        } else {
+                            month = 1;
+                        }
                         if (ourYear < year ||
                                 (year == ourYear && ourMonth < month) ||
                                 (year == ourYear && month == ourMonth && ourDay <= dayOfMonth)) {
@@ -197,19 +210,32 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
             @Override
             public void onClick(View v) {
                 // get date
+                DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
                 String ourDate = date.getText().toString();
-                String[] ourDateSp = ourDate.split("-");
-                int ourDay = Integer.parseInt(ourDateSp[0]);
-                int ourMonth = Integer.parseInt(ourDateSp[1]);
-                int ourYear = Integer.parseInt(ourDateSp[2]);
-                Date theDate = new Date(ourYear, ourMonth, ourDay);
+//                String[] ourDateSp = ourDate.split("-");
+//                int ourDay = Integer.parseInt(ourDateSp[0]);
+//                int ourMonth = Integer.parseInt(ourDateSp[1]);
+//                int ourYear = Integer.parseInt(ourDateSp[2]);
+                Date theDate = null;
+                try {
+                    theDate = DF.parse(ourDate);
+                }catch (ParseException e){
+
+                }
+                 //new Date(ourYear, ourMonth, ourDay);
                 // get endDate
                 String ourEndDate = endDate.getText().toString();
-                String[] ourEndDateSp = ourEndDate.split("-");
-                int ourEndDay = Integer.parseInt(ourEndDateSp[0]);
-                int ourEndMonth = Integer.parseInt(ourEndDateSp[1]);
-                int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
-                Date theEndDate = new Date(ourEndYear, ourEndMonth, ourEndDay);
+//                String[] ourEndDateSp = ourEndDate.split("-");
+//                int ourEndDay = Integer.parseInt(ourEndDateSp[0]);
+//                int ourEndMonth = Integer.parseInt(ourEndDateSp[1]);
+//                int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
+                Date theEndDate = null;
+                try {
+                    theEndDate = DF.parse(ourEndDate);
+                }catch (ParseException e){
+
+                }
+
                 // get tags
                 String theTags = tagsView.getText().toString();
                 // Making a receipt

@@ -13,8 +13,9 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
-   <!-- <ImageView
-        android:id="@+id/lblListItem"
+
+    <ImageView
+        android:id="@+id/imgListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 -->
