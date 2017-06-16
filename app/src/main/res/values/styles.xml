@@ -9,12 +9,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
     </style>
         <string name="mine_kvitteringer">Mine Kvitteringer </string>
         <string name="kategorier">Kategorier</string>
 
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/YourTextAppareance</item>
+    </style>
 
+    <style name="YourTextAppareance" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
 
 
 </resources>

@@ -9,14 +9,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/primary">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kvit It"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:textSize="25sp"
             />
 
@@ -96,8 +96,8 @@
             android:layout_gravity="bottom"
             android:gravity="center"
             android:text="Tilføj"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorPrimary"/>
+            android:textColor="@color/white"
+            android:background="@color/primary"/>
 
         <Button
             android:id="@+id/fortryd_button"
@@ -106,9 +106,9 @@
             android:layout_gravity="bottom"
             android:text="Fortryd"
             android:gravity="center"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/white"
             android:layout_marginLeft="10dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/primary"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         //getActionBar().setHomeButtonEnabled(true);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         // get the reference of FrameLayout and TabLayout
         simpleFrameLayout = (FrameLayout) findViewById(R.id.simpleFrameLayout);

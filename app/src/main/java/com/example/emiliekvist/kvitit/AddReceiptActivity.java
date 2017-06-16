@@ -82,6 +82,7 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
             month = 1;
         }
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        Toast.makeText(getApplicationContext(), "Month is "+month, Toast.LENGTH_LONG).show();
 
         dateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year, month-1, day);
         endDateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year + 2, month-1, day);
