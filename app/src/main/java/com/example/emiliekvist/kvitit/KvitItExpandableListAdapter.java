@@ -35,7 +35,6 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         DF = new SimpleDateFormat("dd-MM-yyyy");
         this._context = context;
         realm = Realm.getDefaultInstance();
-
     }
 
 

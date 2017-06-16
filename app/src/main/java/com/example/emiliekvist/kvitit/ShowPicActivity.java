@@ -1,30 +1,45 @@
 package com.example.emiliekvist.kvitit;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.File;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by EmilieKvist on 16-06-2017.
  */
 
 public class ShowPicActivity extends Activity {
+
+    Button delete;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_pic);
 
+        final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
+
         Bundle extras = getIntent().getExtras();
 
-        String path = extras.get("path").toString();
+        final String path = extras.get("path").toString();
 
         ImageView picture = (ImageView) findViewById(R.id.vis_billede);
 
-        File myIm = new File(path);
+        final File myIm = new File(path);
         Bitmap myBitmap;
 
         if (myIm.exists()) {
@@ -34,6 +49,18 @@ public class ShowPicActivity extends Activity {
         }
 
         picture.setImageBitmap(myBitmap);
+
+        // deletes files from realm
+        delete = (Button) findViewById(R.id.delete_button);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myIm.delete();
+                Intent homeIntent = new Intent(ShowPicActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
 
     }
 }

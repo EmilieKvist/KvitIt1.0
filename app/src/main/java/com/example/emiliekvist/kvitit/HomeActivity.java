@@ -13,8 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -43,11 +41,19 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // checks if the picture still exists and deletes kvittering if it doesn't
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
+        int index = 0;
 
         for (Kvittering k : kvitteringer) {
-            Log.i("HomeAct", "der er gemt et billede");
+            File temp = new File(k.photoPath);
+            if (! temp.exists()) {
+                realm.beginTransaction();
+                kvitteringer.deleteFromRealm(index);
+                realm.commitTransaction();
+            }
+            index++;
         }
 
         /*
@@ -148,13 +154,10 @@ public class HomeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 if (photoFile != null) {
-                    Log.i("HomeAct", "photofile != null");
                     Uri photoURI = FileProvider.getUriForFile(HomeActivity.this,
                             "com.example.emiliekvist.fileprovider",
                             photoFile);
-                    Log.i("HomeAct", "photoURI made");
                     camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                    Log.i("HomeAct", "starting camera");
                     startActivityForResult(camera_intent, CAM_REQUEST);
                 }
 

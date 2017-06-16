@@ -58,5 +58,4 @@ public class MineKvitTab extends Fragment {
 
         return rootView;
     }
-
 }
