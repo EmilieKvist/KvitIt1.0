@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,9 +27,11 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     Realm realm;
+    DateFormat DF;
 
 
     public KvitItExpandableListAdapter(Context context) {
+        DF = new SimpleDateFormat("dd-MM-yyyy");
         this._context = context;
         realm = Realm.getDefaultInstance();
 
@@ -71,7 +75,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition).toString();
+        String headerTitle = DF.format(getGroup(groupPosition));
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
