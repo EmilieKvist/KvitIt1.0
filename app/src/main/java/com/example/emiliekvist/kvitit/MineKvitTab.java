@@ -4,6 +4,7 @@ package com.example.emiliekvist.kvitit;
  * Created by katrinethoft on 13/06/2017.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -43,6 +44,17 @@ public class MineKvitTab extends Fragment {
 
         expListView.setAdapter(new KvitItExpandableListAdapter(getContext()));
 
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                ImageView child = (ImageView) v.findViewById(R.id.imgListItem);
+                String path = child.getTag().toString();
+                Intent showPicIntent = new Intent(getActivity(), ShowPicActivity.class);
+                showPicIntent.putExtra("path", path);
+                startActivity(showPicIntent);
+                return true;
+            }
+        });
 
         return rootView;
     }
