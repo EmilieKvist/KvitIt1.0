@@ -2,31 +2,20 @@ package com.example.emiliekvist.kvitit;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageSwitcher;
-import android.widget.ImageView;
-//
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -34,6 +23,8 @@ import java.util.Date;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+
+//
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -91,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 //        tabLayout.addTab(kategoriTab); // add  the tab  in the TabLayout
 
         // Instantierer en ViewPager og en PagerAdapter
-        final ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(),
                 tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
@@ -138,7 +129,6 @@ public class HomeActivity extends AppCompatActivity {
 //
 //            }
 //        });
-
 
 
         //Adding onClickListener for add receipt button
@@ -190,10 +180,13 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("HomeAct", "current photo path: " + mCurrentPhotoPath);
-        Intent addRecIntent = new Intent(HomeActivity.this, AddReceiptActivity.class);
-        addRecIntent.putExtra("current_photo", mCurrentPhotoPath);
-        startActivity(addRecIntent);
-    }
+        if (requestCode == CAM_REQUEST && resultCode == RESULT_OK) {
+            Log.i("HomeAct", "current photo path: " + mCurrentPhotoPath);
+            Intent addRecIntent = new Intent(HomeActivity.this, AddReceiptActivity.class);
+            addRecIntent.putExtra("current_photo", mCurrentPhotoPath);
+            startActivity(addRecIntent);
+        }
 
+
+    }
 }
