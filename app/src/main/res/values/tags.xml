@@ -2,26 +2,26 @@
 <resources>
     <string-array name="tags_array">
         <item>Vælg tags</item>
-        <item>Tøj</item>
-        <item>Sko</item>
-        <item>Tasker</item>
-        <item>Telefoni</item>
-        <item>Hvidevarer</item>
-        <item>Lyd-Billede</item>
-        <item>Computer</item>
+        <item>Autoudstyr-både</item>
         <item>Bolig</item>
-        <item>Have</item>
-        <item>Husholdningsapperater</item>
-        <item>Sport-Fritid</item>
-        <item>Spil</item>
-        <item>Foto-Video</item>
-        <item>Børn-Familie</item>
-        <item>Renovering-Byggeri</item>
-        <item>Skønhed-Helse</item>
-        <item>Autoudstyr-Både</item>
-        <item>Kontorartikler</item>
-        <item>Underholdning</item>
+        <item>Børn-familie</item>
+        <item>Computer</item>
         <item>Diverse</item>
         <item>Dyr</item>
+        <item>Foto-Video</item>
+        <item>Have</item>
+        <item>Husholdningsapperater</item>
+        <item>Hvidevarer</item>
+        <item>Kontorartikler</item>
+        <item>Lyd-Billede</item>
+        <item>Renovering-Byggeri</item>
+        <item>Sko</item>
+        <item>Skønhed-Helse</item>
+        <item>Spil</item>
+        <item>Sport-Fritid</item>
+        <item>Tasker</item>
+        <item>Telefoni</item>
+        <item>Tøj</item>
+        <item>Underholdning</item>
     </string-array>
 </resources>

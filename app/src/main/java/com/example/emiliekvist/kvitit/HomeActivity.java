@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -160,6 +162,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private File createImageFile() throws IOException {
         // Create an image file name
