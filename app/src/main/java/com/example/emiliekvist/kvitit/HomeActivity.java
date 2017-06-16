@@ -26,7 +26,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-
+//
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
