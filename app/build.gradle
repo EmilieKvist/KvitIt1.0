@@ -7,7 +7,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.example.emiliekvist.kvitit"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
