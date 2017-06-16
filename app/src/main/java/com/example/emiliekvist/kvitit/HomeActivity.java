@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         for (Kvittering k : kvitteringer) {
             Log.i("HomeAct", "der er gemt et billede");
         }
+
         /*
         File myIm = new File(kvitteringer.get(0).photoPath);
         ImageView image;
@@ -187,34 +188,12 @@ public class HomeActivity extends AppCompatActivity {
         return image;
     }
 
-    private File getFile() {
-        File folder = new File("sdcard/camera_app");
-
-        if(!folder.exists()){
-            folder.mkdir();
-        }
-
-        File image_file = new File(folder,"cam_image.jpg");
-
-
-        return image_file;
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String path = "sdcard/camera_app/cam_image.jpg";
-        ImageView imageView = null;
-        imageView.setImageDrawable(Drawable.createFromPath(path));
-
-
-
         Log.i("HomeAct", "current photo path: " + mCurrentPhotoPath);
         Intent addRecIntent = new Intent(HomeActivity.this, AddReceiptActivity.class);
         addRecIntent.putExtra("current_photo", mCurrentPhotoPath);
         startActivity(addRecIntent);
     }
-
-
-
-
 
 }

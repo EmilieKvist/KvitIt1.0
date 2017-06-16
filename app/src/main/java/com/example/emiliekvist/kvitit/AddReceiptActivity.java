@@ -66,7 +66,7 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         // få fat i billede
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            currentPath = extras.getString("current_path");
+            currentPath = extras.getString("current_photo");
         }
 
         // dato og udløbsdato datepickers
