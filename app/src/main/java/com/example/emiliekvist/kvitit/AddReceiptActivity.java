@@ -83,8 +83,8 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         }
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        dateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year, month, day);
-        endDateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year + 2, month, day);
+        dateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year, month-1, day);
+        endDateDialog = new DatePickerDialog(this, AddReceiptActivity.this, year + 2, month-1, day);
 
         date = (Button) findViewById(R.id.date);
         date.setText(day + "-" + month + "-" + year);
@@ -108,6 +108,11 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                             thisMonth++;
                         } else {
                             thisMonth = 1;
+                        }
+                        if (month < 12) {
+                            month++;
+                        } else {
+                            month = 1;
                         }
                         int thisDay = calendar.get(Calendar.DAY_OF_MONTH);
                         if (year < thisYear ||
@@ -142,6 +147,11 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                         int ourDay = Integer.parseInt(ourDateSp[0]);
                         int ourMonth = Integer.parseInt(ourDateSp[1]);
                         int ourYear = Integer.parseInt(ourDateSp[2]);
+                        if (month < 12) {
+                            month++;
+                        } else {
+                            month = 1;
+                        }
                         if (ourYear < year ||
                                 (year == ourYear && ourMonth < month) ||
                                 (year == ourYear && month == ourMonth && ourDay <= dayOfMonth)) {

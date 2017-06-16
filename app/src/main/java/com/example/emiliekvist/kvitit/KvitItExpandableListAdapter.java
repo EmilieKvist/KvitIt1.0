@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,21 +41,25 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
+        // finds number of distinct dates
         return realm.where(Kvittering.class).distinct("dato").sort("dato").size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
+        // finds number of receipts in each date (how many receipts in each group
         return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAll().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
+        // finds all distinct dates
         return realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
+        // finds all receipts and sorts them in dates
         return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAllSorted("dato").get(childPosition);
     }
 
@@ -73,6 +78,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    // Method that shows all distinct dates as groups
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String headerTitle = DF.format(getGroup(groupPosition));
@@ -81,7 +87,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
-
+        // sets up the view for the dates
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
@@ -90,12 +96,25 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    // method that adds children to groups
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        final String childText = (String) getChild(groupPosition, childPosition).toString();
+        //final String childText = (String) getChild(groupPosition, childPosition).toString();
 
-//        File myIm = new File(((Kvittering)getChild(groupPosition, childPosition)).photoPath);
-//        Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
+        // get tags as text
+        final String childText = "" + ((Kvittering) getChild(groupPosition, childPosition)).tags;
+
+        // save image as bitmap
+        Log.i("ExpL", ((Kvittering)getChild(groupPosition, childPosition)).photoPath);
+
+        File myIm = new File(((Kvittering)getChild(groupPosition, childPosition)).photoPath);
+        Bitmap myBitmap;
+
+        if (myIm.exists()) {
+            myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
+        } else {
+            myBitmap = BitmapFactory.decodeResource(_context.getResources(), R.drawable.blank_bitmap);
+        }
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
@@ -105,9 +124,15 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
-        //ImageView lblListItem = (ImageView) convertView.findViewById(R.id.lblListItem);
+        ImageView img = (ImageView) convertView.findViewById(R.id.imgListItem);
         txtListChild.setText(childText);
-        //lblListItem.setImageBitmap(myBitmap);
+        img.setImageBitmap(myBitmap);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return convertView;
     }
 
