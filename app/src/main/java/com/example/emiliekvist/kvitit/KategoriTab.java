@@ -31,7 +31,7 @@ public class KategoriTab extends Fragment {
         View rootView = inflater.inflate(R.layout.kategori_tab, container, false);
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 
-        expListView.setAdapter(new KvitItExpandableListAdapter(getContext()));
+        expListView.setAdapter(new KvitItExpandableListAdapter(getContext(), true));
 
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override

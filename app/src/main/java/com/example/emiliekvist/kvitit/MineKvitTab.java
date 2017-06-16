@@ -42,7 +42,7 @@ public class MineKvitTab extends Fragment {
 
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 
-        expListView.setAdapter(new KvitItExpandableListAdapter(getContext()));
+        expListView.setAdapter(new KvitItExpandableListAdapter(getContext(), false));
 
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override

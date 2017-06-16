@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,40 +27,65 @@ import io.realm.Realm;
 
 public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
+    private final boolean isTag;
+    private String[] tagsArray;
     private Context _context;
     Realm realm;
     DateFormat DF;
 
 
-    public KvitItExpandableListAdapter(Context context) {
+    public KvitItExpandableListAdapter(Context context, boolean isTag) {
         DF = new SimpleDateFormat("dd-MM-yyyy");
         this._context = context;
+        this.isTag = isTag;
         realm = Realm.getDefaultInstance();
+        tagsArray = _context.getResources().getStringArray(R.array.tags_array);
+
     }
 
 
     @Override
     public int getGroupCount() {
         // finds number of distinct dates
-        return realm.where(Kvittering.class).distinct("dato").sort("dato").size();
+        if (!isTag) {
+            return realm.where(Kvittering.class).distinct("dato").sort("dato").size();
+        }
+        else {
+            return tagsArray.length;
+        }
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
         // finds number of receipts in each date (how many receipts in each group
-        return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAll().size();
+        if (!isTag) {
+            return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAll().size();
+        }
+        else {
+            return realm.where(Kvittering.class).contains("tags", tagsArray[groupPosition]).findAll().size();
+        }
     }
 
     @Override
     public Object getGroup(int groupPosition) {
         // finds all distinct dates
-        return realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato;
+        if (!isTag) {
+            return realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato;
+        }
+        else {
+            return tagsArray[groupPosition];
+        }
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         // finds all receipts and sorts them in dates
-        return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAllSorted("dato").get(childPosition);
+        if (!isTag) {
+            return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAllSorted("dato").get(childPosition);
+        }
+        else {
+            return realm.where(Kvittering.class).contains("tags", tagsArray[groupPosition]).findAll().get(childPosition);
+        }
     }
 
     @Override
@@ -80,7 +106,13 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
     // Method that shows all distinct dates as groups
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = DF.format(getGroup(groupPosition));
+        String headerTitle;
+        if (!isTag) {
+            headerTitle = DF.format(getGroup(groupPosition));
+        }
+        else {
+            headerTitle = (String) getGroup(groupPosition);
+        }
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
