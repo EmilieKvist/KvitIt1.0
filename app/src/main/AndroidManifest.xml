@@ -37,6 +37,9 @@
 
         <activity android:name=".AddReceiptActivity">
         </activity>
+
+        <activity android:name=".ShowPicActivity">
+        </activity>
     </application>
 
 

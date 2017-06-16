@@ -107,7 +107,8 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         // save image as bitmap
         Log.i("ExpL", ((Kvittering)getChild(groupPosition, childPosition)).photoPath);
 
-        File myIm = new File(((Kvittering)getChild(groupPosition, childPosition)).photoPath);
+        String path = ((Kvittering)getChild(groupPosition, childPosition)).photoPath;
+        File myIm = new File(path);
         Bitmap myBitmap;
 
         if (myIm.exists()) {
@@ -127,12 +128,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView img = (ImageView) convertView.findViewById(R.id.imgListItem);
         txtListChild.setText(childText);
         img.setImageBitmap(myBitmap);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        img.setTag(path);
         return convertView;
     }
 
