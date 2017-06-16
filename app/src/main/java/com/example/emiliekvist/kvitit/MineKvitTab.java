@@ -38,41 +38,11 @@ public class MineKvitTab extends Fragment {
         View rootView = inflater.inflate(R.layout.mine_kvit_tab, container, false);
 
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
-        prepareListData();
-        expListView.setAdapter(new KvitItExpandableListAdapter(getContext(),listDataHeader, listDataChild));
+
+        expListView.setAdapter(new KvitItExpandableListAdapter(getContext()));
 
 
         return rootView;
-    }
-
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listDataHeader.add("Smykker");
-        listDataHeader.add("Sport og Fritid");
-        listDataHeader.add("Spil");
-
-        // Adding child data
-        List<String> smykker = new ArrayList<String>();
-        smykker.add("The Shawshank Redemption");
-        smykker.add("The Godfather");
-
-
-        List<String> sportFritid = new ArrayList<String>();
-        sportFritid.add("Aerobics");
-        sportFritid.add("Hest");
-
-
-        List<String> tasker = new ArrayList<String>();
-        tasker.add("East Pack");
-        tasker.add("Mulberry");
-
-
-        listDataChild.put(listDataHeader.get(0), smykker); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), sportFritid);
-        listDataChild.put(listDataHeader.get(2), tasker);
     }
 
 }

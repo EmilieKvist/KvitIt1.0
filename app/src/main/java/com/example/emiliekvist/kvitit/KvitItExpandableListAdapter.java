@@ -25,16 +25,12 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     Realm realm;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
 
-    public KvitItExpandableListAdapter(Context context, List<String> listDataHeader,
-                                       HashMap<String, List<String>> listChildData) {
+
+    public KvitItExpandableListAdapter(Context context) {
         this._context = context;
         realm = Realm.getDefaultInstance();
-        this._listDataHeader = listDataHeader;
-        this._listDataChild = listChildData;
+
     }
 
 
