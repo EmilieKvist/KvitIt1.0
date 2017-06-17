@@ -1,6 +1,9 @@
 package com.example.emiliekvist.kvitit;
 
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +22,7 @@ import android.widget.FrameLayout;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     TabLayout tabLayout;
     //private ImageView image;
     static final int CAM_REQUEST = 1;
+    private PendingIntent pendingIntent;
 
     String mCurrentPhotoPath;
 
@@ -48,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
 
         for (Kvittering k : kvitteringer) {
             File temp = new File(k.photoPath);
-            if (! temp.exists()) {
+            if (!temp.exists()) {
                 realm.beginTransaction();
                 kvitteringer.deleteFromRealm(index);
                 realm.commitTransaction();
@@ -164,9 +170,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date today = new Date();
+        //Chekker om der er en kvittering der er udløbet:
+        for (Kvittering k : kvitteringer) {
+            if (today.after(k.udløbsDato)) {
+                sendNotification(k);
+            }
+        }
     }
-
-
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -194,6 +206,24 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(addRecIntent);
         }
 
+
+    }
+
+    private void sendNotification(Kvittering k){
+        NotificationCompat.Builder builder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("Kvittering udløbet")
+                        .setContentText("Kvittering tilføjet den: " + k.dato + "er udløbet");
+
+        Intent notificationIntent = new Intent(this,HomeActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
 
     }
 }

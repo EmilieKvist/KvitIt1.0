@@ -6,6 +6,7 @@
     <uses-feature android:name="android.hardware.camera2"></uses-feature>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
+
     <application
         android:name=".KvitItApplication"
         android:allowBackup="true"
@@ -41,6 +42,14 @@
         </activity>
 
         <activity android:name=".ShowPicActivity">
+        </activity>
+
+        <activity android:name=".NotificationView"
+            android:label="Details of notification"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity"/>
         </activity>
     </application>
 
