@@ -22,7 +22,6 @@ import android.widget.FrameLayout;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -170,9 +169,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date today = new Date();
+
         //Chekker om der er en kvittering der er udløbet:
+        Date today = new Date();
         for (Kvittering k : kvitteringer) {
             if (today.after(k.udløbsDato)) {
                 sendNotification(k);
@@ -209,6 +208,7 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    //Sender en notifikation om at en kvittering er udløbet
     private void sendNotification(Kvittering k){
         NotificationCompat.Builder builder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
