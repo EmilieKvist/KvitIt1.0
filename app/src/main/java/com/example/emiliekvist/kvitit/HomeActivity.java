@@ -5,19 +5,29 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import java.io.File;
@@ -38,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     //private ImageView image;
     static final int CAM_REQUEST = 1;
     private PendingIntent pendingIntent;
-
+    private static final String FTS_VIRTUAL_TABLE = "FTS";
     String mCurrentPhotoPath;
 
     @Override
@@ -226,4 +236,36 @@ public class HomeActivity extends AppCompatActivity {
         manager.notify(0, builder.build());
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem searchViewItem = menu.findItem(R.id.action_search);
+        final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+        // Sætter tekstfarven til at være hvid
+        ((EditText)searchViewAndroidActionBar.findViewById(android.support.v7.appcompat.R.id.search_src_text))
+                .setTextColor(Color.WHITE);
+        // Sætter hint til at være hvid
+//        ((EditText)searchViewAndroidActionBar.findViewById(android.support.v7.appcompat.R.id.search_src_text))
+//                .setHintTextColor(Color.WHITE);
+
+        searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchViewAndroidActionBar.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+
 }
