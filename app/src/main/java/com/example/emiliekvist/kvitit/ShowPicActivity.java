@@ -1,6 +1,8 @@
 package com.example.emiliekvist.kvitit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -53,19 +55,35 @@ public class ShowPicActivity extends Activity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myIm.delete();
-                int index = 0;
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                myIm.delete();
+                                int index = 0;
 
-                for (Kvittering k : kvitteringer) {
-                    File temp = new File(k.photoPath);
-                    if (!temp.exists()) {
-                        realm.beginTransaction();
-                        kvitteringer.deleteFromRealm(index);
-                        realm.commitTransaction();
+                                for (Kvittering k : kvitteringer) {
+                                    File temp = new File(k.photoPath);
+                                    if (!temp.exists()) {
+                                        realm.beginTransaction();
+                                        kvitteringer.deleteFromRealm(index);
+                                        realm.commitTransaction();
+                                    }
+                                    index++;
+                                }
+                                finish();
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
                     }
-                    index++;
-                }
-                finish();
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ShowPicActivity.this);
+                builder.setMessage("Er du sikker?").setPositiveButton("Ja", dialogClickListener)
+                        .setNegativeButton("Nej", dialogClickListener).show();
             }
         });
 

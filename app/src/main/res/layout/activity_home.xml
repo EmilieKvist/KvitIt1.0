@@ -24,9 +24,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif-regular"
                 android:text="Kvit It"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="24sp"
                 />
 
         </LinearLayout>
@@ -37,7 +38,6 @@
         android:id="@+id/simpleTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-thin"
         style="@style/AppTabLayout"
         app:tabBackground="@color/primary"
         app:tabIndicatorColor="@color/white"
@@ -55,12 +55,12 @@
             android:layout_width="73dp"
             android:layout_height="72dp"
             android:clickable="true"
-            app:backgroundTint="@color/primary"
+            app:backgroundTint="@color/pDark"
             app:fabSize="normal"
             app:srcCompat="@android:drawable/ic_input_add"
             android:tint="@android:color/white"
             android:layout_gravity="bottom|end"
-            android:layout_margin="28dp"
+            android:layout_margin="24dp"
             />
 
         <ImageView
