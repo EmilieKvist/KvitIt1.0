@@ -7,7 +7,6 @@ package com.example.emiliekvist.kvitit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class MineKvitTab extends Fragment {
     private KvitItExpandableListAdapter kvitItExpandableListAdapter;
     private ExpandableListView expListView;
-    private ArrayList<String> listDataHeader;
-    private HashMap<String, List<String>> listDataChild;
 
     public MineKvitTab() {
     }
@@ -37,13 +30,14 @@ public class MineKvitTab extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.mine_kvit_tab, container, false);
 
+        //Laver et ExpandableListView og en ExpandableListAdapter
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
         kvitItExpandableListAdapter = new KvitItExpandableListAdapter(getContext(), false);
 
         expListView.setAdapter(kvitItExpandableListAdapter);
 
 
-
+        //Sætter billederne ind i ExpandableListView
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {

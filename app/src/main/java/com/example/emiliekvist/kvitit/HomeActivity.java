@@ -35,12 +35,8 @@ public class HomeActivity extends AppCompatActivity {
 
     FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
-    //private ImageView image;
     static final int CAM_REQUEST = 1;
-    private PendingIntent pendingIntent;
-    private static final String FTS_VIRTUAL_TABLE = "FTS";
     String mCurrentPhotoPath;
-
     Realm realm = Realm.getDefaultInstance();
     RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
 
@@ -49,9 +45,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // checks if the picture still exists and deletes kvittering if it doesn't
+        // Chekker at billedet stadig findes, og sletter kvitteringen hvis det ikke findes
         int index = 0;
-
         for (Kvittering k : kvitteringer) {
             File temp = new File(k.photoPath);
             if (!temp.exists()) {
@@ -63,15 +58,13 @@ public class HomeActivity extends AppCompatActivity {
         }
 
 
-        //getActionBar().setHomeButtonEnabled(true);
+        //Laver en toolbar øverst på skærmet
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
-        // get the reference of FrameLayout and TabLayout
+        // Finder referencen af FrameLayout og TabLayout
         simpleFrameLayout = (FrameLayout) findViewById(R.id.simpleFrameLayout);
-
-
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
 
 
@@ -84,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
 
-        //Adding onClickListener for add receipt button
+        //Tilføjer onClickListener til tilføj kvittering knappen
         FloatingActionButton addReceipt = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         addReceipt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +103,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        //Chekker om der er en kvittering der er udløbet:
+        //Chekker om der er en kvittering der er udløbet
+        //Hvis en kvittering er udløbet sendes en notifikation
         Date today = new Date();
         for (Kvittering k : kvitteringer) {
             if (today.after(k.udløbsDato)) {
@@ -119,8 +113,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    //Laver en billedefil i Exsternal Storage
     private File createImageFile() throws IOException {
-        // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -131,11 +125,12 @@ public class HomeActivity extends AppCompatActivity {
         );
         Log.i("HomeAct", "storage: " + storageDir.toString());
 
-        // Save a file: path for use with ACTION_VIEW intents
+        //Gem en fil: sti til nuværende billede
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
+    //Starter kameraet med det formål at tage og godkende et billede
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAM_REQUEST && resultCode == RESULT_OK) {
@@ -161,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
 
-        // Add as notification
+        // Tilføjer en notifikation
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());
 

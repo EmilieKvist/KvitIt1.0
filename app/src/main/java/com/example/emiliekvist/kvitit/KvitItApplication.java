@@ -10,6 +10,7 @@ import io.realm.Realm;
 
 public class KvitItApplication extends Application {
 
+    //Laver applikationen
     @Override
     public void onCreate() {
         super.onCreate();

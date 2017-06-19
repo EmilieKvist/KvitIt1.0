@@ -1,14 +1,9 @@
 package com.example.emiliekvist.kvitit;
 
 import android.app.Activity;
-import android.os.Bundle;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +14,13 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import io.realm.Realm;
 
 /**
@@ -190,7 +192,7 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         add.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get date
+                // få fat i datoen
                 DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
                 String ourDate = date.getText().toString();
                 Date theDate = null;
@@ -199,8 +201,8 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 }catch (ParseException e){
 
                 }
-                 //new Date(ourYear, ourMonth, ourDay);
-                // get endDate
+
+                // få fat i udløbsdatoen
                 String ourEndDate = endDate.getText().toString();
                 Date theEndDate = null;
                 try {
@@ -209,13 +211,12 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
 
                 }
 
-                // get tags
+                // få fat i kategorierne
                 String theTags = tagsView.getText().toString();
-                // Making a receipt
+                //Laver en kvittering
                 Kvittering newRec = new Kvittering(theDate, theEndDate, theTags, currentPath);
-                // add to Realm
+                // tilføjer til Realm
                 realm.beginTransaction();
-                //realm.createObject(Kvittering.class);
                 realm.copyToRealm(newRec);
                 realm.commitTransaction();
                 Toast.makeText(AddReceiptActivity.this, "Kvitteringen er tilføjet", Toast.LENGTH_LONG).show();
@@ -225,6 +226,7 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
     }
 
 
+    //Sætter datoen til en specifik dato
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
     }

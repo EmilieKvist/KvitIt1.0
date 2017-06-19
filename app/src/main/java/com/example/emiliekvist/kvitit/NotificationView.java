@@ -11,6 +11,7 @@ public class NotificationView extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        //Laver et View til notifikationer
         setContentView(R.layout.notification);
     }
 }

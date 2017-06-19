@@ -31,7 +31,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
     Realm realm;
     DateFormat DF;
 
-
+    //Laver vores egen ExpandableListAdapter
     public KvitItExpandableListAdapter(Context context, boolean isTag) {
         DF = new SimpleDateFormat("dd-MM-yyyy");
         this._context = context;
@@ -43,7 +43,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        // finds number of distinct dates
+        //Finder antal forskellige datoer
         if (!isTag) {
             return realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).size();
         }
@@ -54,7 +54,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        // finds number of receipts in each date (how many receipts in each group
+        //  finder antal kvitteringer i hver dato (hvor mange kvitteringer der er i hver gruppe)
         if (!isTag) {
             return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).get(groupPosition).dato).findAll().size();
         }
@@ -65,7 +65,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        // finds all distinct dates
+        //finder alle forskellige datoer
         if (!isTag) {
             return realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).get(groupPosition).dato;
         }
@@ -76,7 +76,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        // finds all receipts and sorts them in dates
+        //Finder alle kvitteringer og sorterer dem efter dato
         if (!isTag) {
             return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).get(groupPosition).dato).findAllSorted("dato", Sort.DESCENDING).get(childPosition);
         }
@@ -100,7 +100,8 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
-    // Method that shows all distinct dates as groups
+
+    //Metode der viser alle forskellige datoer og grupper
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String headerTitle;
@@ -115,7 +116,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group, null);
         }
-        // sets up the view for the dates
+        // Sætter et View op til alle datoer
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
@@ -124,7 +125,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
-    // method that adds children to groups
+    //Metode der tilføjer alle børn til gruppen
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         //final String childText = (String) getChild(groupPosition, childPosition).toString();

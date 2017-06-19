@@ -26,6 +26,7 @@ public class ShowPicActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_pic);
 
+        //Henter kvittings objekterne fra Realm
         final Realm realm = Realm.getDefaultInstance();
         final RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
 
@@ -38,6 +39,7 @@ public class ShowPicActivity extends Activity {
         final File myIm = new File(path);
         Bitmap myBitmap;
 
+        //Chekker at billede stadig findes
         if (myIm.exists()) {
             myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
         } else {
@@ -46,7 +48,7 @@ public class ShowPicActivity extends Activity {
 
         picture.setImageBitmap(myBitmap);
 
-        // deletes files from realm
+        // sletter kvitteringen fra Realm
         delete = (Button) findViewById(R.id.delete_button);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override

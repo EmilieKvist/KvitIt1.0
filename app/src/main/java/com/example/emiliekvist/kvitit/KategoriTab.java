@@ -14,7 +14,6 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 
 public class KategoriTab extends Fragment {
-
     private ExpandableListView expListView;
     private KvitItExpandableListAdapter kvitItExpandableListAdapter;
 
@@ -28,13 +27,16 @@ public class KategoriTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Laver et View ud fra layoutet kategori_tab
         View rootView = inflater.inflate(R.layout.kategori_tab, container, false);
-        expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
 
+        //Laver et ExpandableListView og en ExpandableListAdapter
+        expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
         kvitItExpandableListAdapter = new KvitItExpandableListAdapter(getContext(), true);
 
         expListView.setAdapter(kvitItExpandableListAdapter);
 
+        //Sætter billederne ind i ExpandableListView
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {

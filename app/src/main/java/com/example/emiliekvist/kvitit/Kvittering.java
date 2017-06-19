@@ -1,9 +1,5 @@
 package com.example.emiliekvist.kvitit;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.Serializable;
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -11,7 +7,7 @@ import io.realm.RealmObject;
 /**
  * Created by EmilieKvist on 15-06-2017.
  */
-
+//Kvittering objekt
 public class Kvittering extends RealmObject {
 
     public Date dato;
