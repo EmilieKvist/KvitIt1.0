@@ -178,38 +178,4 @@ public class HomeActivity extends AppCompatActivity {
         manager.notify(0, builder.build());
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        MenuItem searchViewItem = menu.findItem(R.id.action_search);
-        final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
-        // Sætter tekstfarven til at være hvid
-        ((EditText)searchViewAndroidActionBar.findViewById(android.support.v7.appcompat.R.id.search_src_text))
-                .setTextColor(Color.WHITE);
-
-        searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                searchViewAndroidActionBar.clearFocus();
-                Intent searchIntent = new Intent(HomeActivity.this, SearchActivity.class);
-                searchIntent.putExtra("search", query);
-                Log.i("ExpL", "we put search-extra");
-                startActivity(searchIntent);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-
-
 }
