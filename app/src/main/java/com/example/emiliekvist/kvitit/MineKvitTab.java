@@ -35,6 +35,7 @@ public class MineKvitTab extends Fragment {
         kvitItExpandableListAdapter = new KvitItExpandableListAdapter(getContext(), false);
 
         expListView.setAdapter(kvitItExpandableListAdapter);
+        expListView.setEmptyView(rootView.findViewById(R.id.empty));
 
 
         //Sætter billederne ind i ExpandableListView
