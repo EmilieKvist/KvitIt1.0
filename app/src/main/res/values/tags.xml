@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tags_array">
-        <item>Vælg tags</item>
+        <item>Ingen kategori</item>
         <item>Autoudstyr-både</item>
         <item>Bolig</item>
         <item>Børn-familie</item>

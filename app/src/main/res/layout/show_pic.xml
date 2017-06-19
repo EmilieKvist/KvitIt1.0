@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/primary">
 
     <ImageView
         android:id="@+id/vis_billede"
@@ -15,9 +15,10 @@
         android:id="@+id/delete_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="delete"
+        android:text="slet"
         android:gravity="center"
         android:textColor="@color/white"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/primary"
+        />
 
 </LinearLayout>

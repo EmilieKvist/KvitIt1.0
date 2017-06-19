@@ -180,7 +180,7 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 String tag = parent.getSelectedItem().toString();
                 String temp = tagsView.getText().toString();
                 Log.i("AddR", temp);
-                if (temp.equals("Vælg tags ")) {
+                if (temp.equals("Ingen tags ")) {
                     temp = "";
                 }
                 temp = temp + tag + " ";

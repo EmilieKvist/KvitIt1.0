@@ -63,7 +63,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="Tags"
+        android:text="Kategorier"
         android:textSize="25sp"
         android:gravity="bottom"
         android:textColor="@color/colorBlack" />

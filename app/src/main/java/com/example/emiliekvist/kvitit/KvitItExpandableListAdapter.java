@@ -43,7 +43,6 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
 
     }
 
-
     @Override
     public int getGroupCount() {
         // finds number of distinct dates
