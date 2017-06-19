@@ -27,6 +27,7 @@ public class ShowPicActivity extends Activity {
         setContentView(R.layout.show_pic);
 
         final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
 
         Bundle extras = getIntent().getExtras();
 
@@ -51,6 +52,19 @@ public class ShowPicActivity extends Activity {
             @Override
             public void onClick(View v) {
                 myIm.delete();
+                //Intent homeIntent = new Intent(ShowPicActivity.this, HomeActivity.class);
+                //startActivity(homeIntent);
+                int index = 0;
+
+                for (Kvittering k : kvitteringer) {
+                    File temp = new File(k.photoPath);
+                    if (!temp.exists()) {
+                        realm.beginTransaction();
+                        kvitteringer.deleteFromRealm(index);
+                        realm.commitTransaction();
+                    }
+                    index++;
+                }
                 finish();
             }
         });

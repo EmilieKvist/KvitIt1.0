@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import io.realm.Realm;
+import io.realm.Sort;
 
 /**
  * Created by Thoke on 2017-06-15.
@@ -44,7 +45,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
     public int getGroupCount() {
         // finds number of distinct dates
         if (!isTag) {
-            return realm.where(Kvittering.class).distinct("dato").sort("dato").size();
+            return realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).size();
         }
         else {
             return tagsArray.length;
@@ -55,7 +56,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
     public int getChildrenCount(int groupPosition) {
         // finds number of receipts in each date (how many receipts in each group
         if (!isTag) {
-            return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAll().size();
+            return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).get(groupPosition).dato).findAll().size();
         }
         else {
             return realm.where(Kvittering.class).contains("tags", tagsArray[groupPosition]).findAll().size();
@@ -66,7 +67,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
     public Object getGroup(int groupPosition) {
         // finds all distinct dates
         if (!isTag) {
-            return realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato;
+            return realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).get(groupPosition).dato;
         }
         else {
             return tagsArray[groupPosition];
@@ -77,7 +78,7 @@ public class KvitItExpandableListAdapter extends BaseExpandableListAdapter {
     public Object getChild(int groupPosition, int childPosition) {
         // finds all receipts and sorts them in dates
         if (!isTag) {
-            return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato").get(groupPosition).dato).findAllSorted("dato").get(childPosition);
+            return realm.where(Kvittering.class).equalTo("dato", realm.where(Kvittering.class).distinct("dato").sort("dato", Sort.DESCENDING).get(groupPosition).dato).findAllSorted("dato", Sort.DESCENDING).get(childPosition);
         }
         else {
             return realm.where(Kvittering.class).contains("tags", tagsArray[groupPosition]).findAll().get(childPosition);

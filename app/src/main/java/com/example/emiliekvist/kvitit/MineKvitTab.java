@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MineKvitTab extends Fragment {
+    private KvitItExpandableListAdapter kvitItExpandableListAdapter;
     private ExpandableListView expListView;
     private ArrayList<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
@@ -36,8 +37,11 @@ public class MineKvitTab extends Fragment {
         View rootView = inflater.inflate(R.layout.mine_kvit_tab, container, false);
 
         expListView = (ExpandableListView) rootView.findViewById(R.id.lvExp);
+        kvitItExpandableListAdapter = new KvitItExpandableListAdapter(getContext(), false);
 
-        expListView.setAdapter(new KvitItExpandableListAdapter(getContext(), false));
+        expListView.setAdapter(kvitItExpandableListAdapter);
+
+
 
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -53,4 +57,11 @@ public class MineKvitTab extends Fragment {
 
         return rootView;
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        kvitItExpandableListAdapter.notifyDataSetInvalidated();
+    }
+
 }
