@@ -15,8 +15,6 @@ public class Kvittering extends RealmObject {
     public String tags;
     public String photoPath;
 
-    public Kvittering() {}
-
     public Kvittering(Date dato, Date udløbsDato, String tags, String photoPath) {
         this.dato = dato;
         this.udløbsDato = udløbsDato;

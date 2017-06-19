@@ -1,13 +1,9 @@
 package com.example.emiliekvist.kvitit;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,7 +27,6 @@ public class ShowPicActivity extends Activity {
         setContentView(R.layout.show_pic);
 
         final Realm realm = Realm.getDefaultInstance();
-        final RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
 
         Bundle extras = getIntent().getExtras();
 
@@ -56,8 +51,6 @@ public class ShowPicActivity extends Activity {
             @Override
             public void onClick(View v) {
                 myIm.delete();
-                //Intent homeIntent = new Intent(ShowPicActivity.this, HomeActivity.class);
-                //startActivity(homeIntent);
                 finish();
             }
         });

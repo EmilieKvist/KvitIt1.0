@@ -1,43 +1,25 @@
 package com.example.emiliekvist.kvitit;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
-import io.realm.RealmList;
-import io.realm.RealmModel;
 
 /**
  * Created by EmilieKvist on 13-06-2017.
@@ -198,8 +180,6 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
-                //startActivity(homeIntent);
                 finish();
             }
         });
@@ -213,10 +193,6 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 // get date
                 DateFormat DF = new SimpleDateFormat("dd-MM-yyyy");
                 String ourDate = date.getText().toString();
-//                String[] ourDateSp = ourDate.split("-");
-//                int ourDay = Integer.parseInt(ourDateSp[0]);
-//                int ourMonth = Integer.parseInt(ourDateSp[1]);
-//                int ourYear = Integer.parseInt(ourDateSp[2]);
                 Date theDate = null;
                 try {
                     theDate = DF.parse(ourDate);
@@ -226,10 +202,6 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                  //new Date(ourYear, ourMonth, ourDay);
                 // get endDate
                 String ourEndDate = endDate.getText().toString();
-//                String[] ourEndDateSp = ourEndDate.split("-");
-//                int ourEndDay = Integer.parseInt(ourEndDateSp[0]);
-//                int ourEndMonth = Integer.parseInt(ourEndDateSp[1]);
-//                int ourEndYear = Integer.parseInt(ourEndDateSp[2]);
                 Date theEndDate = null;
                 try {
                     theEndDate = DF.parse(ourEndDate);
@@ -247,9 +219,6 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 realm.copyToRealm(newRec);
                 realm.commitTransaction();
                 Toast.makeText(AddReceiptActivity.this, "Kvitteringen er tilføjet", Toast.LENGTH_LONG).show();
-                // Start homeActivity
-                //Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
-                //startActivity(homeIntent);
                 finish();
             }
         });

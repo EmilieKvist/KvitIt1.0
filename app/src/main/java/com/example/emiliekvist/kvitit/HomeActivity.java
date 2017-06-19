@@ -71,14 +71,6 @@ public class HomeActivity extends AppCompatActivity {
             index++;
         }
 
-        /*
-        File myIm = new File(kvitteringer.get(0).photoPath);
-        ImageView image;
-        image = (ImageView) findViewById(R.id.image_view);
-        Bitmap myBitmap = BitmapFactory.decodeFile(myIm.getAbsolutePath());
-        image.setImageBitmap(myBitmap);
-        */
-
 
         //getActionBar().setHomeButtonEnabled(true);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -91,18 +83,6 @@ public class HomeActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.simpleTabLayout);
 
-        // Create a new Tab named "Mine Kvitteringer"
-//        TabLayout.Tab mineKvitTab = tabLayout.newTab();
-//        mineKvitTab.setText("Mine kvitteringer"); // set the Text for the first Tab
-
-        // mine kvit tab
-//        tabLayout.addTab(mineKvitTab); // add  the tab at in the TabLayout
-//
-//        // Create a new Tab named "Kategorier"
-//        TabLayout.Tab kategoriTab = tabLayout.newTab();
-//        kategoriTab.setText("Kategorier"); // set the Text for the second Tab
-//
-//        tabLayout.addTab(kategoriTab); // add  the tab  in the TabLayout
 
         // Instantierer en ViewPager og en PagerAdapter
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -111,47 +91,6 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-
-        // perform setOnTabSelectedListener event on TabLayout
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                // get the current selected tab's position and replace the fragment accordingly
-//                 Fragment fragment = null;
-//                switch (tab.getPosition()) {
-//                    case 0:
-//                        fragment = new MineKvitTab();
-//                        break;
-//                    case 1:
-//                        fragment = new KategoriTab();
-//                        break;
-//                    default:
-//
-//                }
-//
-//
-//
-//
-//               // FragmentManager fm = getSupportFragmentManager();
-//                FragmentManager fm = getFragmentManager();
-//
-//               // FragmentTransaction ft = fm.beginTransaction();
-//              //  ft.replace(R.id.simpleFrameLayout, fragment);
-//            //    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//              //  ft.commit();
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
 
 
         //Adding onClickListener for add receipt button
@@ -246,9 +185,6 @@ public class HomeActivity extends AppCompatActivity {
         // Sætter tekstfarven til at være hvid
         ((EditText)searchViewAndroidActionBar.findViewById(android.support.v7.appcompat.R.id.search_src_text))
                 .setTextColor(Color.WHITE);
-        // Sætter hint til at være hvid
-//        ((EditText)searchViewAndroidActionBar.findViewById(android.support.v7.appcompat.R.id.search_src_text))
-//                .setHintTextColor(Color.WHITE);
 
         searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

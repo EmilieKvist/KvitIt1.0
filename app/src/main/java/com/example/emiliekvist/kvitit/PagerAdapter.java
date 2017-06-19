@@ -3,8 +3,6 @@ package com.example.emiliekvist.kvitit;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentManager;
-//import android.support.v4.app.FragmentStatePagerAdapter;
-
 
 /**
  * Created by Mads on 15-06-2017.
@@ -17,7 +15,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
-//        this.mNumOfTabs = NumOfTabs;
     }
 
     @Override
