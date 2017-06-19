@@ -33,7 +33,9 @@ import android.widget.FrameLayout;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -51,14 +53,15 @@ public class HomeActivity extends AppCompatActivity {
     private static final String FTS_VIRTUAL_TABLE = "FTS";
     String mCurrentPhotoPath;
 
+    Realm realm = Realm.getDefaultInstance();
+    RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         // checks if the picture still exists and deletes kvittering if it doesn't
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<Kvittering> kvitteringer = realm.where(Kvittering.class).findAll();
         int index = 0;
 
         for (Kvittering k : kvitteringer) {
@@ -190,6 +193,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchViewAndroidActionBar.clearFocus();
+                Intent searchIntent = new Intent(HomeActivity.this, SearchActivity.class);
+                searchIntent.putExtra("search", query);
+                Log.i("ExpL", "we put search-extra");
+                startActivity(searchIntent);
                 return true;
             }
 
@@ -198,6 +205,7 @@ public class HomeActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         return super.onCreateOptionsMenu(menu);
     }
 

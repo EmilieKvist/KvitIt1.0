@@ -44,6 +44,9 @@
         <activity android:name=".ShowPicActivity">
         </activity>
 
+        <activity android:name=".SearchActivity">
+        </activity>
+
         <activity android:name=".NotificationView"
             android:label="Details of notification"
             android:parentActivityName=".HomeActivity">
