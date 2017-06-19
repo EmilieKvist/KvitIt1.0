@@ -80,8 +80,8 @@ public class ShowPicActivity extends Activity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ShowPicActivity.this);
-                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
+                builder.setMessage("Er du sikker?").setPositiveButton("Ja", dialogClickListener)
+                        .setNegativeButton("Nej", dialogClickListener).show();
             }
         });
 
