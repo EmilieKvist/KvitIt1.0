@@ -180,7 +180,7 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 String tag = parent.getSelectedItem().toString();
                 String temp = tagsView.getText().toString();
                 Log.i("AddR", temp);
-                if (temp.equals("Ingen tags ")) {
+                if (temp.equals("Ingen kategori ")) {
                     temp = "";
                 }
                 temp = temp + tag + " ";
@@ -198,8 +198,9 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
         cancel.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
+                //Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
+                //startActivity(homeIntent);
+                finish();
             }
         });
 
@@ -247,8 +248,9 @@ public class AddReceiptActivity extends Activity implements OnDateSetListener {
                 realm.commitTransaction();
                 Toast.makeText(AddReceiptActivity.this, "Kvitteringen er tilføjet", Toast.LENGTH_LONG).show();
                 // Start homeActivity
-                Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
+                //Intent homeIntent = new Intent(AddReceiptActivity.this, HomeActivity.class);
+                //startActivity(homeIntent);
+                finish();
             }
         });
     }

@@ -56,8 +56,9 @@ public class ShowPicActivity extends Activity {
             @Override
             public void onClick(View v) {
                 myIm.delete();
-                Intent homeIntent = new Intent(ShowPicActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
+                //Intent homeIntent = new Intent(ShowPicActivity.this, HomeActivity.class);
+                //startActivity(homeIntent);
+                finish();
             }
         });
 
