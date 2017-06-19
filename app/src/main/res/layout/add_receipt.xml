@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:text="Kvit It"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="24sp"
             />
 
     </android.support.v7.widget.Toolbar>
@@ -28,7 +29,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:text="Dato"
-        android:textSize="25sp"
+        android:textSize="14sp"
         android:gravity="bottom"
         android:textColor="@color/colorBlack"/>
 
@@ -36,6 +37,7 @@
         android:id="@+id/date"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:textSize="14sp"
         android:background="@drawable/edges_textbox"
         android:layout_gravity="center"
         />
@@ -46,7 +48,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:text="Udløbsdato"
-        android:textSize="25sp"
+        android:textSize="14sp"
         android:gravity="bottom"
         android:textColor="@color/colorBlack"/>
 
@@ -64,7 +66,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:text="Kategorier"
-        android:textSize="25sp"
+        android:textSize="14sp"
         android:gravity="bottom"
         android:textColor="@color/colorBlack" />
 
