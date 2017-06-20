@@ -15,10 +15,10 @@ tools:context=".MineKvitTab">
         android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Du har ingen kvittering(er)."
-        android:layout_centerInParent="true"
+        android:text="Du har ingen kvitteringer"
+        android:gravity="center"
         android:textAlignment="center"
-        android:textSize="25dip" />
+        android:textSize="20dip" />
 
 
 </RelativeLayout>
